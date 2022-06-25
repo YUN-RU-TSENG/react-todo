@@ -1,0 +1,18 @@
+.todo-edit {
+    padding: 45px 29px 36px;
+    background: #eeeeee 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 472px;
+    height: 445px;
+}
+
+.todo-edit-title {
+    margin-bottom: 26px;
+    font: normal normal bold 20px/25px Helvetica Neue;
+    letter-spacing: 0px;
+    color: #6f7377;
+}

@@ -1,0 +1,12 @@
+.base-button {
+    cursor: pointer;
+    padding: 10px 18px;
+    background: #f7f7f7 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    border: none;
+    margin-right: 12px;
+}
+
+.base-button.green {
+    color: #24c3c2;
+}

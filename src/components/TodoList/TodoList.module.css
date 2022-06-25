@@ -1,0 +1,9 @@
+.todo-list {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+.todo-list:not(:last-of-type) {
+    margin-bottom: 20px;
+}

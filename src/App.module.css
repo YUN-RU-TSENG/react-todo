@@ -1,0 +1,30 @@
+.app {
+    background: #2e3545 0% 0% no-repeat padding-box;
+}
+
+.app-wrapper {
+    width: 608px;
+    margin: 0 auto;
+    padding-top: 73px;
+}
+
+.app-title {
+    padding-left: 29px;
+    margin-bottom: 57px;
+    font: normal normal normal 24px/29px sans-serif Neue;
+    letter-spacing: 0px;
+    color: #9fa3a7;
+}
+
+.todo-add {
+    position: fixed;
+    bottom: 60px;
+    right: 60px;
+    width: 60px;
+    height: 60px;
+    font: normal normal normal 12px/12px sans-serif Neue;
+    padding: 24px;
+    border: none;
+    border-radius: 30px;
+    background-color: #24c3c2;
+}
