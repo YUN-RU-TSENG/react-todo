@@ -29,11 +29,18 @@
 }
 
 .todo-list-item-button {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    padding: 6px 0;
     margin-right: 16px;
     background-color: transparent;
     border: none;
+    cursor: pointer;
+    transition: all .3s;
+    border-radius: 6px;
+}
+
+.todo-list-item-button:hover {
+    background-color: #ffffff40;
 }
 
 .todo-list-item-tag {

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 class BaseInput extends React.Component {
     render() {
         const isShowErrorMessage = function (errorMessage) {
-            return errorMessage ? 'error' : ''
+            return errorMessage ? styles['error'] : ''
         }
 
         const randomNumber = function (N) {
@@ -15,12 +15,18 @@ class BaseInput extends React.Component {
         return (
             <label
                 htmlFor={'input' + randomNumber(1000)}
-                className={`${styles['base-input-label error']} ${isShowErrorMessage(
+                className={`${styles['base-input-label']} ${isShowErrorMessage(
                     this.props.errorMessage
                 )}`}
             >
                 <p className={styles['base-title']}>{this.props.label}：</p>
-                <input id="input" type="text" className={styles['base-input']} />
+                <input
+                    id="input"
+                    type="text"
+                    className={styles['base-input']}
+                    value={this.props.value}
+                    onInput={this.props.changeValue}
+                />
                 <p className={styles['error-text']}>{this.props.errorMessage}</p>
             </label>
         )

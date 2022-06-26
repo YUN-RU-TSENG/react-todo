@@ -24,7 +24,7 @@ BaseButton.propTypes = {
     isGreen: PropTypes.bool,
     type: PropTypes.string,
     children: PropTypes.string.isRequired,
-    handleClick: PropTypes.func.isRequired,
+    handleClick: PropTypes.func,
 }
 
 export default BaseButton

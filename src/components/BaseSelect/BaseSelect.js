@@ -22,12 +22,16 @@ class BaseSelect extends React.Component {
             >
                 <p className={styles['base-title']}>{this.props.label}：</p>
                 <input id="select-input" type="checkbox" className={styles['base-select-toggle']} />
-                <div className={styles['base-select']}>{this.props.option}</div>
-                <div className={styles['options']} onClick={this.changeOption}>
+                <div className={styles['base-select']}>{this.props.optionValue}</div>
+                <div className={styles['options']}>
                     {this.props.options.map((option, index) => {
                         return (
-                            <div className={styles['option']} key={index}>
-                                {option.name}
+                            <div
+                                className={styles['option']}
+                                key={index}
+                                onClick={() => this.props.changeOption(option)}
+                            >
+                                {option}
                             </div>
                         )
                     })}

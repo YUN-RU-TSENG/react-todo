@@ -1,6 +1,7 @@
 .base-select-label {
     display: block;
     position: relative;
+    margin-bottom: 12px;
 }
 
 .base-select-label.error .base-select {
@@ -28,6 +29,7 @@
 }
 
 .base-title {
+    margin: 0;
     font: normal normal bold 16px/19px Helvetica Neue;
     letter-spacing: 0px;
     color: #6f7377;
@@ -43,7 +45,7 @@
     padding: 12px 14px;
     font: normal normal normal 16px/18px Helvetica Neue;
     letter-spacing: 0px;
-    color: #bababa;
+    color: #000000;
     border: 1px solid #b5babf;
     border-radius: 4px;
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './App.module.css'
 import TodoList from './components/TodoList/TodoList'
 import TodoListItem from './components/TodoListItem/TodoListItem'
-import TodoFormEdit from './components/TodoFormEdit/TodoFormEdit'
+import TodoFormAdd from './components/TodoFormAdd/TodoFormAdd'
 
 class App extends React.Component {
     constructor(props) {
@@ -39,7 +39,11 @@ class App extends React.Component {
         this.toggleForm = this.toggleForm.bind(this)
     }
 
-    addTodoItem() {}
+    addTodoItem(newTodo) {
+        this.setState((state) => ({
+            todoList: [...state.todoList, newTodo],
+        }))
+    }
 
     deleteTodoItem(id) {}
 
@@ -65,10 +69,11 @@ class App extends React.Component {
                             ></TodoListItem>
                         ))}
                     </TodoList>
-                    <TodoFormEdit
+                    <TodoFormAdd
                         isOpen={this.state.isFormEditOpen}
                         toggleForm={this.toggleForm}
-                    ></TodoFormEdit>
+                        addTodoItem={this.addTodoItem}
+                    ></TodoFormAdd>
                     <button className={styles['todo-add']} onClick={this.toggleForm}>
                         +
                     </button>
