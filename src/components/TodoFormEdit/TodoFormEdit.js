@@ -10,14 +10,12 @@ class TodoFormEdit extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            currentTodo: {
-                title: '代辦事項',
-                finish: false,
-                id: '479057234859073920',
-                level: 'medium',
-                expiryDate: '2022-06-06',
+            currentTodoError: {
+                title: '',
+                expiryDate: '',
             },
         }
+        this.updateEditTodo = this.updateEditTodo.bind(this)
     }
 
     componentDidMount() {
@@ -36,32 +34,38 @@ class TodoFormEdit extends React.Component {
         document.body.classList.remove('modal-open')
     }
 
+    updateEditTodo(e) {
+        this.props.updateEditTodo()
+        this.props.toggleForm()
+        e.preventDefault()
+    }
+
     render() {
         const toggleFormEdit = (
-            <BaseForm formTitle={'Add Todo'}>
+            <BaseForm formTitle="Edit Todo">
                 <BaseInput
-                    value={this.state.title}
+                    value={this.props.currentEditTodo?.title}
                     label="事項"
-                    errorMessage={''}
-                    changeValue={function () {}}
+                    errorMessage={this.state.currentTodoError.title}
+                    changeValue={(e) => this.props.updateEditTodoTitle(e.target.value)}
                 ></BaseInput>
                 <BaseSelect
                     label="層級"
                     options={['medium', 'large', 'small']}
-                    option={this.state.level}
+                    optionValue={this.props.currentEditTodo?.level}
                     errorMessage={''}
-                    changeOption={function () {}}
+                    changeOption={(e) => this.props.updateEditTodoLevel(e.target.value)}
                 ></BaseSelect>
                 <BaseInput
-                    value={this.state.title}
+                    value={this.props.currentEditTodo?.expiryDate}
                     label="代辦時間"
-                    errorMessage={''}
-                    changeValue={function () {}}
+                    errorMessage={this.state.currentTodoError.expiryDate}
+                    changeValue={(e) => this.props.updateEditTodoExpiryDate(e.target.value)}
                 ></BaseInput>
                 <BaseButton handleClick={this.props.toggleForm} type="button">
                     Cancel
                 </BaseButton>
-                <BaseButton type="submit" isGreen={true}>
+                <BaseButton type="submit" isGreen={true} handleClick={this.updateEditTodo}>
                     OK
                 </BaseButton>
             </BaseForm>
@@ -74,6 +78,11 @@ class TodoFormEdit extends React.Component {
 TodoFormEdit.propTypes = {
     isOpen: PropTypes.bool,
     toggleForm: PropTypes.func.isRequired,
+    currentEditTodo: PropTypes.object,
+    updateEditTodo: PropTypes.func.isRequired,
+    updateEditTodoTitle: PropTypes.func.isRequired,
+    updateEditTodoLevel: PropTypes.func.isRequired,
+    updateEditTodoExpiryDate: PropTypes.func.isRequired,
 }
 
 export default TodoFormEdit

@@ -1,11 +1,12 @@
 .app {
     background: #2e3545 0% 0% no-repeat padding-box;
+    min-height: 100vh;
 }
 
 .app-wrapper {
     width: 608px;
     margin: 0 auto;
-    padding-top: 73px;
+    padding: 73px 0;
 }
 
 .app-title {
