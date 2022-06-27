@@ -61,7 +61,6 @@ class TodoFormEdit extends React.Component {
     }
 
     render() {
-        console.log(323, this.props.isOpen)
         return (
             this.props.isOpen && (
                 <BaseForm formTitle="Edit Todo">
