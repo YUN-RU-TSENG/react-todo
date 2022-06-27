@@ -72,6 +72,11 @@
     color: #bababa;
     border: 1px solid #b5babf;
     border-top: none;
+    transition: all 0.3s ease;
+}
+
+.option:hover {
+    color: #000;
 }
 
 @keyframes fade {

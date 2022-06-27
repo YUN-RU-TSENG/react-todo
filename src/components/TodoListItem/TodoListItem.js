@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './TodoListItem.module.css'
 import PropTypes from 'prop-types'
-import { ReactComponent as FinishLogo } from '../../images/checked.svg'
-import { ReactComponent as TrashLogo } from '../../images/bucket.svg'
-import { ReactComponent as UpdateLogo } from '../../images/pencil.svg'
+import { ReactComponent as FinishLogo } from '../../assets/images/checked.svg'
+import { ReactComponent as TrashLogo } from '../../assets/images/bucket.svg'
+import { ReactComponent as UpdateLogo } from '../../assets/images/pencil.svg'
 
 class TodoListItem extends React.Component {
     get currentFinishState() {
