@@ -8,20 +8,15 @@ class BaseSelect extends React.Component {
         this.changeOption = this.props.changeOption.bind(this)
     }
 
-    render() {
-        const isShowErrorMessage = function (errorMessage) {
-            return errorMessage ? 'error' : ''
-        }
+    get isShowErrorMessage() {
+        return this.props.errorMessage ? styles['error'] : ''
+    }
 
+    render() {
         return (
-            <label
-                htmlFor="select-input"
-                className={`${styles['base-select-label']} ${isShowErrorMessage(
-                    this.props.errorMessage
-                )}`}
-            >
+            <label className={`${styles['base-select-label']} ${this.isShowErrorMessage}`}>
                 <p className={styles['base-title']}>{this.props.label}：</p>
-                <input id="select-input" type="checkbox" className={styles['base-select-toggle']} />
+                <input type="checkbox" className={styles['base-select-toggle']} />
                 <div className={styles['base-select']}>{this.props.optionValue}</div>
                 <div className={styles['options']}>
                     {this.props.options.map((option, index) => {

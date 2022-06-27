@@ -3,25 +3,15 @@ import styles from './BaseInput.module.css'
 import PropTypes from 'prop-types'
 
 class BaseInput extends React.Component {
+    get isShowErrorMessage() {
+        return this.props.errorMessage ? styles['error'] : ''
+    }
+
     render() {
-        const isShowErrorMessage = function (errorMessage) {
-            return errorMessage ? styles['error'] : ''
-        }
-
-        const randomNumber = function (N) {
-            return Math.floor(Math.random() * N)
-        }
-
         return (
-            <label
-                htmlFor={'input' + randomNumber(1000)}
-                className={`${styles['base-input-label']} ${isShowErrorMessage(
-                    this.props.errorMessage
-                )}`}
-            >
+            <label className={`${styles['base-input-label']} ${this.isShowErrorMessage}`}>
                 <p className={styles['base-title']}>{this.props.label}：</p>
                 <input
-                    id="input"
                     type="text"
                     className={styles['base-input']}
                     value={this.props.value}

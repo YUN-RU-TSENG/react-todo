@@ -3,14 +3,14 @@ import styles from './BaseButton.module.css'
 import PropTypes from 'prop-types'
 
 class BaseButton extends React.Component {
-    render() {
-        const isGreen = function (isGreen) {
-            return isGreen ? styles['green'] : ''
-        }
+    get isGreen() {
+        return this.props.isGreen ? styles['green'] : ''
+    }
 
+    render() {
         return (
             <button
-                className={`${styles['base-button']} ${isGreen(this.props.isGreen)}`}
+                className={`${styles['base-button']} ${this.isGreen}`}
                 type={this.props.type}
                 onClick={this.props.handleClick}
             >

@@ -10,10 +10,6 @@ class TodoFormEdit extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            currentTodoError: {
-                title: '',
-                expiryDate: '',
-            },
             isFormStartValidate: false,
         }
     }
