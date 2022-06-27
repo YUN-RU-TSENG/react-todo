@@ -29,21 +29,9 @@ class TodoFormAdd extends React.Component {
         }
     }
 
-    componentDidMount() {
-        if (this.props.isOpen) {
-            return document.body.classList.add('modal-open')
-        }
-        document.body.classList.remove('modal-open')
-    }
-
-    componentDidUpdate() {
-        if (this.props.isOpen) {
-            return document.body.classList.add('modal-open')
-        }
-        document.body.classList.remove('modal-open')
-    }
-
-    componentWillUnmount() {
+    // 開關 modal 時鎖定 body 尺寸
+    lockBodyElementSize = () => {
+        if (this.props.isOpen) return document.body.classList.add('modal-open')
         document.body.classList.remove('modal-open')
     }
 
@@ -86,6 +74,8 @@ class TodoFormAdd extends React.Component {
     }
 
     render() {
+        this.lockBodyElementSize()
+
         return (
             this.props.isOpen && (
                 <BaseForm formTitle={'Add Todo'}>
