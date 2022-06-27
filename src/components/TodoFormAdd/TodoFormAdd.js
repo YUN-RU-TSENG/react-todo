@@ -108,7 +108,9 @@ class TodoFormAdd extends React.Component {
                         value={this.state.currentTodo.expiryDate}
                         label="代辦時間"
                         errorMessage={
-                            this.state.isFormStartValidate ? this.currentTodoErrorStatus.title : ''
+                            this.state.isFormStartValidate
+                                ? this.currentTodoErrorStatus.expiryDate
+                                : ''
                         }
                         changeValue={(e) => this.updatedCurrentTodo(e, 'expiryDate')}
                     ></BaseInput>

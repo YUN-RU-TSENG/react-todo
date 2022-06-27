@@ -6,21 +6,17 @@ import { ReactComponent as TrashLogo } from '../../images/bucket.svg'
 import { ReactComponent as UpdateLogo } from '../../images/pencil.svg'
 
 class TodoListItem extends React.Component {
+    get currentFinishState() {
+        return this.props.finish ? styles['finish'] : ''
+    }
+
+    get currentTagColor() {
+        return styles[this.props.level]
+    }
+
     render() {
-        const currentTagColor = function (level) {
-            return styles[level]
-        }
-
-        const currentFinishState = function (finish) {
-            return finish ? styles['finish'] : ''
-        }
-
         return (
-            <li
-                className={`${styles['todo-list-item-wrapper']} ${currentFinishState(
-                    this.props.finish
-                )}`}
-            >
+            <li className={`${styles['todo-list-item-wrapper']} ${this.currentFinishState}`}>
                 <div>
                     <h3 className={styles['todo-list-item-title']}>{this.props.title}</h3>
                     <p className={styles['todo-list-item-text']}> {this.props.expiryDate}</p>
@@ -28,27 +24,23 @@ class TodoListItem extends React.Component {
                         className={styles['todo-list-item-button']}
                         onClick={() => this.props.deleteTodoItem(this.props.id)}
                     >
-                        <TrashLogo/>
+                        <TrashLogo />
                     </button>
                     <button
                         className={styles['todo-list-item-button']}
                         onClick={this.props.toggleEditForm}
                     >
-                        <UpdateLogo/>
+                        <UpdateLogo />
                     </button>
 
                     <button
                         className={styles['todo-list-item-button']}
                         onClick={() => this.props.markTodoItemFinish(this.props.id)}
                     >
-                        <FinishLogo/>
+                        <FinishLogo />
                     </button>
-                    <div
-                        className={`${styles['todo-list-item-tag']} ${currentTagColor(
-                            this.props.level
-                        )}`}
-                    >
-                        測試
+                    <div className={`${styles['todo-list-item-tag']} ${this.currentTagColor}`}>
+                        {this.props.level}
                     </div>
                 </div>
             </li>
