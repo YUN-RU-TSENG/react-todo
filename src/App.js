@@ -91,7 +91,7 @@ class App extends React.Component {
             const [newTodoList] = state.todoList.filter((todo) => todo.id === id)
 
             return {
-                cacheTodo: newTodoList ?? {
+                cacheTodo: { ...newTodoList } ?? {
                     title: '',
                     finish: false,
                     id: '',
