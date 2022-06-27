@@ -25,7 +25,7 @@ class BaseInput extends React.Component {
                     type="text"
                     className={styles['base-input']}
                     value={this.props.value}
-                    onInput={this.props.changeValue}
+                    onInput={(e) => this.props.changeValue(e.target.value)}
                 />
                 <p className={styles['error-text']}>{this.props.errorMessage}</p>
             </label>

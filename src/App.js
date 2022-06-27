@@ -15,19 +15,12 @@ class App extends React.Component {
                 {
                     title: '代辦事項',
                     finish: false,
-                    id: '479057234859073920',
+                    id: '479057',
                     level: 'medium',
-                    expiryDate: '2022-06-06',
-                },
-                {
-                    title: '代辦事項',
-                    finish: true,
-                    id: '479057234859073923',
-                    level: 'small',
-                    expiryDate: '2022-06-06',
+                    expiryDate: new Date().toLocaleDateString(),
                 },
             ],
-            editTodo: {
+            cacheTodo: {
                 title: '',
                 finish: false,
                 id: '',
@@ -35,24 +28,15 @@ class App extends React.Component {
                 expiryDate: '',
             },
         }
-        this.addTodoItem = this.addTodoItem.bind(this)
-        this.updateTodoItemFinishState = this.updateTodoItemFinishState.bind(this)
-        this.updateTodoItem = this.updateTodoItem.bind(this)
-        this.deleteTodoItem = this.deleteTodoItem.bind(this)
-        this.toggleAddForm = this.toggleAddForm.bind(this)
-        this.toggleEditForm = this.toggleEditForm.bind(this)
-        this.updateEditTodoTitle = this.updateEditTodoTitle.bind(this)
-        this.updateEditTodoExpiryDate = this.updateEditTodoExpiryDate.bind(this)
-        this.updateEditTodoLevel = this.updateEditTodoLevel.bind(this)
     }
 
-    addTodoItem(newTodo) {
+    addTodoItem = (newTodo) => {
         this.setState((state) => ({
             todoList: [...state.todoList, newTodo],
         }))
     }
 
-    deleteTodoItem(id) {
+    deleteTodoItem = (id) => {
         this.setState((state) => {
             const newTodoList = state.todoList.filter((todo) => todo.id !== id)
             return {
@@ -61,58 +45,61 @@ class App extends React.Component {
         })
     }
 
-    updateTodoItemFinishState(id) {
+    // 更新當前編輯 todo 的資料
+    updateTodoItem = () => {
         this.setState((state) => {
-            const todoLists = state.todoList.filter((todo) => todo.id !== id)
-            const [newTodoList] = state.todoList.filter((todo) => todo.id === id)
+            const todoLists = state.todoList.filter((todo) => todo.id !== state.cacheTodo.id)
 
             return {
-                todoList: [...todoLists, { ...newTodoList, finish: !newTodoList.finish }],
+                todoList: [...todoLists, state.cacheTodo],
             }
         })
     }
 
-    updateTodoItem() {
+    // 更新當前 todo 完成狀態
+    markTodoItemFinish = (id) => {
         this.setState((state) => {
-            const todoLists = state.todoList.filter((todo) => todo.id !== state.editTodo.id)
-
             return {
-                todoList: [...todoLists, state.editTodo],
+                todoList: state.todoList.map((todo) =>
+                    todo.id !== id
+                        ? todo
+                        : {
+                              ...todo,
+                              finish: !todo.finish,
+                          }
+                ),
             }
         })
     }
 
-    toggleAddForm() {
+    // 更新當前編輯 cache todo 的資料，由於編輯 todo 後可以取消更新，故當前編輯狀態為點擊 todo 的快取版本
+    updateCacheTodo = (property, value) => {
+        this.setState((state) => ({
+            cacheTodo: { ...state.cacheTodo, [property]: value },
+        }))
+    }
+
+    toggleAddForm = () => {
         this.setState((state) => ({ isFormAddOpen: !state.isFormAddOpen }))
     }
 
-    toggleEditForm(id) {
+    // 開關點擊當下的 todo 編輯表單
+    toggleEditForm = (id) => {
+        this.setState((state) => ({ isFormEditOpen: !state.isFormEditOpen }))
+        // 依照點擊的 id 來更新編輯表單內呈現的 cache todo
         this.setState((state) => {
             const [newTodoList] = state.todoList.filter((todo) => todo.id === id)
 
             return {
-                editTodo: newTodoList,
+                cacheTodo: newTodoList ?? {
+                    title: '',
+                    finish: false,
+                    id: '',
+                    level: '',
+                    expiryDate: '',
+                },
             }
         })
-        this.setState((state) => ({ isFormEditOpen: !state.isFormEditOpen }))
-    }
-
-    updateEditTodoTitle(value) {
-        this.setState((state) => ({
-            editTodo: { ...state.editTodo, title: value },
-        }))
-    }
-
-    updateEditTodoLevel(value) {
-        this.setState((state) => ({
-            editTodo: { ...state.editTodo, level: value },
-        }))
-    }
-
-    updateEditTodoExpiryDate(value) {
-        this.setState((state) => ({
-            editTodo: { ...state.editTodo, expiryDate: value },
-        }))
     }
 
     render() {
@@ -130,26 +117,23 @@ class App extends React.Component {
                                 id={todo.id}
                                 key={todo.id}
                                 deleteTodoItem={this.deleteTodoItem}
-                                updateTodoItem={this.updateTodoItemFinishState}
+                                markTodoItemFinish={this.markTodoItemFinish}
                                 toggleEditForm={() => this.toggleEditForm(todo.id)}
-                            ></TodoListItem>
+                            />
                         ))}
                     </TodoList>
                     <TodoFormAdd
                         isOpen={this.state.isFormAddOpen}
                         toggleForm={this.toggleAddForm}
                         addTodoItem={this.addTodoItem}
-                    ></TodoFormAdd>
+                    />
                     <TodoFormEdit
                         isOpen={this.state.isFormEditOpen}
+                        currentEditTodo={this.state.cacheTodo}
                         toggleForm={this.toggleEditForm}
-                        addTodoItem={this.addTodoItem}
-                        currentEditTodo={this.state.editTodo}
-                        updateEditTodo={this.updateTodoItem}
-                        updateEditTodoTitle={this.updateEditTodoTitle}
-                        updateEditTodoLevel={this.updateEditTodoLevel}
-                        updateEditTodoExpiryDate={this.updateEditTodoExpiryDate}
-                    ></TodoFormEdit>
+                        updateTodo={this.updateTodoItem}
+                        updateCacheTodo={this.updateCacheTodo}
+                    />
                     <button className={styles['todo-add']} onClick={this.toggleAddForm}>
                         +
                     </button>

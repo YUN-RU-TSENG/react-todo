@@ -28,20 +28,20 @@ class TodoListItem extends React.Component {
                         className={styles['todo-list-item-button']}
                         onClick={() => this.props.deleteTodoItem(this.props.id)}
                     >
-                        <TrashLogo></TrashLogo>
+                        <TrashLogo/>
                     </button>
                     <button
                         className={styles['todo-list-item-button']}
                         onClick={this.props.toggleEditForm}
                     >
-                        <UpdateLogo></UpdateLogo>
+                        <UpdateLogo/>
                     </button>
 
                     <button
                         className={styles['todo-list-item-button']}
-                        onClick={() => this.props.updateTodoItem(this.props.id)}
+                        onClick={() => this.props.markTodoItemFinish(this.props.id)}
                     >
-                        <FinishLogo></FinishLogo>
+                        <FinishLogo/>
                     </button>
                     <div
                         className={`${styles['todo-list-item-tag']} ${currentTagColor(
@@ -58,7 +58,7 @@ class TodoListItem extends React.Component {
 
 TodoListItem.propTypes = {
     toggleEditForm: PropTypes.func.isRequired,
-    updateTodoItem: PropTypes.func.isRequired,
+    markTodoItemFinish: PropTypes.func.isRequired,
     deleteTodoItem: PropTypes.func.isRequired,
     level: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
