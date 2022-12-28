@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { addTodo, deleteTodo, updateTodo } from './features/todo/todoSlice'
 import styles from './App.module.css'
 import TodoList from './components/TodoList/TodoList'
 import TodoListItem from './components/TodoListItem/TodoListItem'
@@ -6,54 +8,35 @@ import TodoFormAdd from './components/TodoFormAdd/TodoFormAdd'
 import TodoFormEdit from './components/TodoFormEdit/TodoFormEdit'
 
 function App() {
+    // redux app state
+    const todoList = useSelector((state) => state.todo.value)
+    const dispatch = useDispatch()
+
+    // container component state
     const [isFormAddOpen, setIsFormAddOpen] = useState(false)
     const [isFormEditOpen, setIsFormEditOpen] = useState(false)
-    const [todoList, setTodoList] = useState([
-        {
-            title: '代辦事項',
-            finish: false,
-            id: '479057',
-            level: 'medium',
-            expiryDate: new Date().toLocaleDateString(),
-        },
-    ])
     const [cacheTodo, setCacheTodo] = useState()
 
     function addTodoItem(newTodo) {
-        setTodoList((state) => [...state, newTodo])
+        dispatch(addTodo(newTodo))
     }
 
     function deleteTodoItem(id) {
-        setTodoList((state) => {
-            const newTodoList = state.filter((todo) => todo.id !== id)
-            return newTodoList
-        })
+        dispatch(deleteTodo(id))
     }
 
     // 更新當前編輯 todo 的資料
     function updateTodoItem() {
-        setTodoList((state) => {
-            const todoLists = state.filter((todo) => todo.id !== cacheTodo.id)
-
-            return [...todoLists, cacheTodo]
-        })
+        dispatch(updateTodo(cacheTodo))
     }
 
     // 更新當前 todo 完成狀態
     function markTodoItemFinish(id) {
-        setTodoList((state) => {
-            return state.map((todo) =>
-                todo.id !== id
-                    ? todo
-                    : {
-                          ...todo,
-                          finish: !todo.finish,
-                      }
-            )
-        })
+        const todo = todoList.filter((todo) => todo.id === id)
+        console.log('!todo.finish', !todo[0].finish)
+        dispatch(updateTodo({ ...todo[0], finish: !todo[0].finish }))
     }
 
-    // 更新當前編輯 cache todo 的資料，由於編輯 todo 後可以取消更新，故當前編輯狀態為點擊 todo 的快取版本
     function updateCacheTodo(property, value) {
         setCacheTodo((state) => ({ ...state, [property]: value }))
     }
