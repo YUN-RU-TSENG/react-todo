@@ -9,7 +9,7 @@ import TodoFormEdit from './components/TodoFormEdit/TodoFormEdit'
 
 function App() {
     // redux app state
-    const todoList = useSelector((state) => state.todo.value)
+    const todoList = useSelector((state) => state.todo)
     const dispatch = useDispatch()
 
     // container component state
@@ -32,8 +32,7 @@ function App() {
 
     // 更新當前 todo 完成狀態
     function markTodoItemFinish(id) {
-        const todo = todoList.filter((todo) => todo.id === id)
-        console.log('!todo.finish', !todo[0].finish)
+        const todo = todoList.value.filter((todo) => todo.id === id)
         dispatch(updateTodo({ ...todo[0], finish: !todo[0].finish }))
     }
 
@@ -51,7 +50,7 @@ function App() {
 
         // 依照點擊的 id 來更新編輯表單內呈現的 cache todo
         setCacheTodo(() => {
-            const [newTodoList] = todoList.filter((todo) => todo.id === id)
+            const [newTodoList] = todoList.value.filter((todo) => todo.id === id)
 
             return (
                 { ...newTodoList } ?? {
@@ -70,7 +69,7 @@ function App() {
             <div className={styles['app-wrapper']}>
                 <h2 className={styles['app-title']}>代辦清單</h2>
                 <TodoList>
-                    {todoList.map((todo) => (
+                    {todoList.value.map((todo) => (
                         <TodoListItem
                             finish={todo.finish}
                             title={todo.title}

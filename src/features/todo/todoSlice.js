@@ -24,15 +24,15 @@ export const todoSlice = createSlice({
     initialState,
     reducers: {
         addTodo: (state, action) => {
-            state.push(action.payload)
+            state.value.push(action.payload)
         },
         deleteTodo: (state, action) => {
             const newTodoList = state.value.filter((todo) => todo.id !== action.payload)
-            return newTodoList
+            return { value: newTodoList }
         },
         updateTodo: (state, action) => {
             const todoLists = state.value.filter((todo) => todo.id !== action.payload.id)
-            return [...todoLists, action.payload]
+            return { value: [...todoLists, action.payload] }
         },
     },
 })
