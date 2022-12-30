@@ -11,7 +11,6 @@
     一個包含 React Class component、React hook、React+Redux 版本的 TODO list 練習項目。（請切換分支查看程式碼）
     <br />
     <br />
-    <a href="https://yun-ru-tseng.github.io/todo-list/index.html">Vanilla js Demo</a>
   </p>
 </p>
 
